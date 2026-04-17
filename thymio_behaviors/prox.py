@@ -25,6 +25,6 @@ class LEDProxBehavior:
         self.max = np.maximum(values, self.max)
         self.min[not_zero] = np.minimum(values[not_zero], self.min[not_zero])
         bs = np.round(32 * np.clip(
-            (values - self.min) / (self.max - self.min), 0, 1))
-        thymio.call_leds_prox_h(*bs[:7])
+            (values - self.min) / (self.max - self.min), 0, 1)).astype(np.int16)
+        thymio.call_leds_prox_h(*bs[[0, 1, 2, 2, 3, 4, 5, 6, 7]])
         thymio.call_leds_prox_v(*bs[-2:])
