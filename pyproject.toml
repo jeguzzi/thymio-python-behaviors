@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools >= 77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "thymio-behaviors"
+version = "0.0.0"
+dependencies = [
+  "numpy"
+]
+requires-python = ">=3.10"
+authors = [
+  {name = "Jérôme Guzzi", email = "jerome@idsia.ch"}
+]
+maintainers = [
+  {name = "Jérôme Guzzi", email = "jerome@idsia.ch"}
+]
+description = "Python port of the behaviors implemented in the Thymio firmware."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+keywords = ["Thymio"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Homepage = "https://github.com/jeguzzi/thymio-python-behaviors.git"
+Repository = "https://github.com/jeguzzi/thymio-python-behaviors.git"
+Changelog = "https://github.com/jeguzzi/thymio-python-behaviors/blob/master/CHANGELOG.md"
