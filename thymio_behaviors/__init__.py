@@ -10,9 +10,11 @@ from .line import LineFollowingBehavior
 from .prox import LEDProxBehavior
 from .prox_comm import LEDProxCommBehavior
 from .utils import Chain
+from .protocol import ThymioAsebaProtocol
 
 __all__ = [
     'LineFollowingBehavior', 'LEDProxBehavior', 'LEDAccBehavior',
     'LEDButtonsBehavior', 'AccBehavior', 'ExplorerBehavior',
-    'FollowerBehavior', 'LEDProxCommBehavior', 'SoundButtonsBehavior', 'Chain'
+    'FollowerBehavior', 'LEDProxCommBehavior', 'SoundButtonsBehavior', 'Chain',
+    'ThymioAsebaProtocol'
 ]

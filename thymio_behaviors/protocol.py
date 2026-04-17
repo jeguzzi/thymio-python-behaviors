@@ -1,23 +1,11 @@
 from __future__ import annotations
 
-from typing import Protocol
+from typing import Protocol, runtime_checkable
 
-
+@runtime_checkable
 class ThymioAsebaProtocol(Protocol):
 
     def call__leds_set(self, *args: int) -> None:
-        ...
-
-    def call_sound_record(self, *args: int) -> None:
-        ...
-
-    def call_sound_play(self, *args: int) -> None:
-        ...
-
-    def call_sound_replay(self, *args: int) -> None:
-        ...
-
-    def call_sound_system(self, *args: int) -> None:
         ...
 
     def call_leds_circle(self, *args: int) -> None:
@@ -30,9 +18,6 @@ class ThymioAsebaProtocol(Protocol):
         ...
 
     def call_leds_bottom_right(self, *args: int) -> None:
-        ...
-
-    def call_sound_freq(self, *args: int) -> None:
         ...
 
     def call_leds_buttons(self, *args: int) -> None:
@@ -57,6 +42,21 @@ class ThymioAsebaProtocol(Protocol):
         ...
 
     def call_sound_duration(self, *args: int) -> None:
+        ...
+
+    def call_sound_freq(self, *args: int) -> None:
+        ...
+
+    def call_sound_play(self, *args: int) -> None:
+        ...
+
+    def call_sound_record(self, *args: int) -> None:
+        ...
+
+    def call_sound_replay(self, *args: int) -> None:
+        ...
+
+    def call_sound_system(self, *args: int) -> None:
         ...
 
     _fwversion: list[int]
@@ -91,12 +91,8 @@ class ThymioAsebaProtocol(Protocol):
     motor_right_speed: int
     motor_right_target: int
     prox_comm_rx: int
-    prox_comm_rx__align_tol: list[int]
     prox_comm_rx__intensities: list[int]
-    prox_comm_rx__lead: list[int]
     prox_comm_rx__payloads: list[int]
-    prox_comm_rx__tol: list[int]
-    prox_comm_rx__trail: list[int]
     prox_comm_tx: int
     prox_ground_ambiant: list[int]
     prox_ground_delta: list[int]
