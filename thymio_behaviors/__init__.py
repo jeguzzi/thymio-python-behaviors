@@ -1,15 +1,18 @@
 from __future__ import annotations
 
 from .acc import AccBehavior
-from .buttons import LEDButtonsBehavior
+from .led_acc import LEDAccBehavior
+from .led_buttons import LEDButtonsBehavior
+from .sound_buttons import SoundButtonsBehavior
 from .explorer import ExplorerBehavior
 from .follower import FollowerBehavior
 from .line import LineFollowingBehavior
 from .prox import LEDProxBehavior
 from .prox_comm import LEDProxCommBehavior
+from .utils import Chain
 
 __all__ = [
-    'LineFollowingBehavior', 'LEDProxBehavior',
+    'LineFollowingBehavior', 'LEDProxBehavior', 'LEDAccBehavior',
     'LEDButtonsBehavior', 'AccBehavior', 'ExplorerBehavior',
-    'FollowerBehavior', 'LEDProxCommBehavior'
+    'FollowerBehavior', 'LEDProxCommBehavior', 'SoundButtonsBehavior', 'Chain'
 ]
