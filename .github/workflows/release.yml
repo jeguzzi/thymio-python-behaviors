@@ -10,7 +10,7 @@ permissions:
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 jobs:
-  build wheel:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
