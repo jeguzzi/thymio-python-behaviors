@@ -1,0 +1,69 @@
+name: Build and Release
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - '*'
+      - '!*-*'
+permissions:
+  contents: write
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+jobs:
+  build wheel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: install deps
+        run: pip install build
+      - name: build wheel
+        run: |
+          python -m build -w
+      - name: archive wheel
+        uses: actions/upload-artifact@v7
+        with:
+          name: wheel
+          path: dist/*
+          if-no-files-found: error
+  publish_to_testpypi:
+    name: Publish wheels to TestPyPI
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/thymio-behaviors
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+      - name: Publish to Test PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+  publish_to_pypi:
+    name: Publish wheels to PyPI
+    needs:
+      - publish_to_testpypi
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/thymio-behaviors
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          path: dist
+          merge-multiple: true
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true
