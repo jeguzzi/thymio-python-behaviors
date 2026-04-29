@@ -23,8 +23,8 @@ class LEDProxCommBehavior:
             self.max = np.maximum(intensities, self.max)
             self.min[not_zero] = np.minimum(intensities[not_zero],
                                             self.min[not_zero])
-            t = np.floor(32 * (intensities - self.min) /
-                         (self.max - self.min))
+            vs = np.clip((intensities - self.min) / (self.max - self.min), 0, 1)
+            t = np.floor(vs * 32).astype(np.int16)
             thymio.call_leds_circle(t[2], t[3], t[4], t[6], 0, t[5], t[0],
                                     t[1])
             thymio.call_leds_buttons(0, 0, 32, 0)
