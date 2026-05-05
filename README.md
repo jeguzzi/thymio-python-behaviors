@@ -10,14 +10,13 @@ Use `pyaseba` or `pyenki` to apply the behaviors to real and simulated robots.
 ```python
 import time
 
-from pyaseba.client.thymio import Thymio
-
 import thymio_behaviors
+from pyaseba.client.thymio import Thymio
 
 behavior = thymio_behaviors.ExplorerBehavior()
 thymio = Thymio()
 if thymio.connect(start_mirroring=True):
-    thymio.set_controller(behavior, time_step=0.1)
+    thymio.set_behavior(behavior, time_step=0.1)
     time.sleep(10)
 thymio.close(reset=True)
 ```
@@ -29,16 +28,15 @@ Have a look at the [complete example](https://github.com/jeguzzi/pyaseba/blob/ma
 ```python
 import pyenki
 import pyenki.viewer
-from pyenki.adapters import make_controller_from_thymio_behavior
-
 import thymio_behaviors
+from pyenki.adapters import Thymio2AsebaAdapter
 
 behavior = thymio_behaviors.ExplorerBehavior()
-thymio = pyenki.Thymio2()
-thymio.control_step_callback = make_controller_from_thymio_behavior(
-    thymio, behavior)
+robot = pyenki.Thymio2()
 world = pyenki.World(radius=50)
-world.add_object(thymio)
+world.add_object(robot)
+thymio = Thymio2AsebaAdapter(robot)
+thymio.set_behavior(behavior)
 pyenki.viewer.init()
 pyenki.viewer.run_in_viewer(world, duration=10)
 pyenki.viewer.cleanup()
